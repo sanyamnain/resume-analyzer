@@ -8,8 +8,10 @@ def extract_text(file):
     text = ""
     
     for page in reader.pages:
-        text += page.extract_text()
-        
+        content = page.extract_text()
+        if content:   # prevents None error
+            text += content
+            
     return text
 
 
@@ -27,8 +29,8 @@ skills_list = ["python", "sql", "machine learning", "excel"]
 
 def get_missing_skills(resume_text):
     resume_text = resume_text.lower()
-    missing = []
     
+    missing = []
     for skill in skills_list:
         if skill not in resume_text:
             missing.append(skill)
